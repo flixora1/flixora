@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flixora 🎬</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="logo">
+            FLIXORA<span>+</span>
+        </div>
+
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Movies</a>
+            <a href="#">Series</a>
+            <a href="#">Trending</a>
+        </nav>
+
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search movies..."
+            >
+        </div>
+
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <p class="hero-small">
+                WELCOME TO FLIXORA
+            </p>
+
+            <h1>
+                Watch Movies<br>
+                Without Limits.
+            </h1>
+
+            <p>
+                Discover the latest movies, popular releases
+                and trending entertainment.
+            </p>
+
+            <button class="hero-btn">
+                Explore Movies ▶
+            </button>
+
+        </div>
+
+    </section>
+
+<!-- ================= MY LIST ================= -->
+
+<section
+    class="movies-section my-list-section"
+    id="myListSection"
+    style="display: none;"
+>
+
+    <div class="section-title">
+
+        <h2>
+            ❤️ My List
+        </h2>
+
+        <span>
+            Your Saved Movies
+        </span>
+
+    </div>
+
+
+    <div
+        class="movie-grid"
+        id="myListMovies"
+    >
+
+    </div>
+
+</section>
+
+
+    <!-- ================= MOVIES ================= -->
+
+    <section class="movies-section">
+
+        <div class="section-title">
+
+            <h2>
+                🔥 Trending Movies
+            </h2>
+
+            <span>
+                View All →
+            </span>
+
+        </div>
+
+
+        <div class="movie-grid">
+
+<div id="databaseMovies"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="logo">
+            FLIXORA<span>+</span>
+        </div>
+
+        <p>
+            © 2026 Flixora. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>

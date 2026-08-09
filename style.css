@@ -1,0 +1,422 @@
+```css
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #050505;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 5%;
+    background: rgba(5, 5, 5, 0.97);
+    border-bottom: 1px solid #222;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #ffffff;
+}
+
+.logo span {
+    color: #e50914;
+}
+
+.header nav {
+    display: flex;
+    gap: 25px;
+}
+
+.header nav a {
+    color: #ddd;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.header nav a:hover {
+    color: #e50914;
+}
+
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 62vh;
+    padding: 100px 7%;
+    display: flex;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            90deg,
+            #050505 0%,
+            rgba(5, 5, 5, 0.85) 35%,
+            rgba(5, 5, 5, 0.2) 75%,
+            #050505 100%
+        ),
+        linear-gradient(
+            0deg,
+            #050505 0%,
+            transparent 35%
+        ),
+        url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1600&q=80");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-small {
+    color: #e50914;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 6vw, 65px);
+    line-height: 1.05;
+    margin-bottom: 18px;
+}
+
+.hero p {
+    max-width: 520px;
+    color: #ccc;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.hero-btn {
+    margin-top: 25px;
+    padding: 13px 25px;
+    border: none;
+    border-radius: 5px;
+    background: #e50914;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.hero-btn:hover {
+    background: #b20710;
+    transform: translateY(-2px);
+}
+
+
+/* ================= MOVIES ================= */
+
+.movies-section {
+    padding: 35px 5%;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.section-title h2 {
+    font-size: 25px;
+}
+
+.section-title span {
+    color: #e50914;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+/* ================= MOVIE GRID ================= */
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+
+/* ================= MOVIE CARD ================= */
+
+.movie-card {
+    position: relative;
+    min-width: 0;
+    height: 330px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #151515;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.movie-card:hover {
+    transform: scale(1.04);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.7);
+}
+
+
+/* ================= POSTER ================= */
+
+.movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+/* ================= OVERLAY ================= */
+
+.movie-card::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 60%;
+
+    background: linear-gradient(
+        transparent,
+        rgba(0, 0, 0, 0.95)
+    );
+
+    pointer-events: none;
+}
+
+
+/* ================= MOVIE INFO ================= */
+
+.movie-info {
+    position: absolute;
+    z-index: 2;
+    left: 14px;
+    right: 14px;
+    bottom: 13px;
+}
+
+.movie-info h3 {
+    font-size: 18px;
+    margin-bottom: 7px;
+}
+
+.movie-meta {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.movie-meta span {
+    color: #ccc;
+    font-size: 13px;
+}
+
+
+/* ================= WATCH BUTTON ================= */
+
+.watch-btn {
+    display: inline-block;
+    text-decoration: none;
+    border: none;
+    background: #e50914;
+    color: white;
+    padding: 8px 13px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.watch-btn:hover {
+    background: #b20710;
+}
+
+.watch-btn:hover {
+    background: #b20710;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+    margin-top: 50px;
+    padding: 30px 5%;
+    text-align: center;
+    background: #080808;
+    border-top: 1px solid #222;
+}
+
+footer .logo {
+    margin-bottom: 10px;
+}
+
+footer p {
+    color: #777;
+    font-size: 13px;
+}
+
+
+/* ================= TABLET ================= */
+
+@media (max-width: 900px) {
+
+    .movie-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .header nav {
+        gap: 15px;
+    }
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 700px) {
+
+    .header {
+        padding: 14px 18px;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .header nav {
+        display: none;
+    }
+
+    .hero {
+        min-height: 55vh;
+        padding: 70px 22px;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .movies-section {
+        padding: 25px 18px;
+    }
+
+    .movie-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .movie-card {
+        height: 270px;
+    }
+
+    .movie-info {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+    }
+
+    .movie-info h3 {
+        font-size: 15px;
+    }
+
+    .movie-meta {
+        gap: 8px;
+    }
+
+    .watch-btn {
+        padding: 7px 10px;
+        font-size: 11px;
+    }
+}
+
+/* ================= DATABASE MOVIE GRID ================= */
+
+#databaseMovies {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    width: 100%;
+}
+
+#databaseMovies .movie-card {
+    width: 100%;
+}
+
+
+/* ================= TABLET ================= */
+
+@media (max-width: 900px) {
+
+    #databaseMovies {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+
+    #databaseMovies {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+}
+
+/* ================= DATABASE MOVIE POSTER SIZE ================= */
+
+#databaseMovies .movie-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+
+    #databaseMovies .movie-card img {
+        height: 230px;
+    }
+
+}
+/* ================= FINAL DATABASE FIX ================= */
+
+#databaseMovies {
+    display: contents;
+}
+
+#databaseMovies .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Watch Movie - Flixora</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #050505;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+}
+
+.header {
+    height: 70px;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #080808;
+    border-bottom: 1px solid #222;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #e50914;
+}
+
+.back-btn {
+    color: white;
+    text-decoration: none;
+    background: #e50914;
+    padding: 10px 18px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.back-btn:hover {
+    background: #b20710;
+}
+
+.movie-hero {
+    position: relative;
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-backdrop {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(3px);
+    transform: scale(1.08);
+    opacity: .4;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            90deg,
+            #050505 0%,
+            rgba(5,5,5,.9) 40%,
+            rgba(5,5,5,.5) 75%,
+            #050505 100%
+        );
+}
+
+.hero-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 180px;
+    background:
+        linear-gradient(
+            transparent,
+            #050505
+        );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 5;
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    padding: 60px 30px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero-poster {
+    width: 230px;
+    flex-shrink: 0;
+}
+
+.hero-poster img {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.8);
+}
+
+.watch-title {
+    max-width: 720px;
+}
+
+.now-playing {
+    color: #e50914;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+}
+
+.watch-title h1 {
+    font-size: 52px;
+    line-height: 1.1;
+    margin-bottom: 15px;
+}
+
+.movie-meta {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+#watchRating {
+    color: #ffd000;
+    font-weight: bold;
+}
+
+.watch-description {
+    color: #ccc;
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 700px;
+}
+
+.player-section {
+    max-width: 1200px;
+    margin: -20px auto 0;
+    padding: 0 30px 50px;
+    position: relative;
+    z-index: 10;
+}
+
+.player-heading {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.player-heading span {
+    color: #e50914;
+}
+
+.custom-player {
+    position: relative;
+    background: #000;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #242424;
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.8);
+}
+
+.custom-player video {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    object-fit: contain;
+}
+
+.controls {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 12px 16px 14px;
+    background:
+        linear-gradient(
+            transparent,
+            rgba(0,0,0,.95)
+        );
+}
+
+.progress-container {
+    position: relative;
+    z-index: 50;
+    width: 100%;
+    height: 7px;
+    background: #444;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 12px;
+    touch-action: none;
+}
+
+.progress {
+    height: 100%;
+    width: 0%;
+    background: #e50914;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+.control-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.control-btn {
+    border: none;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    font-size: 19px;
+    width: 34px;
+    height: 34px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn:hover {
+    background: rgba(255,255,255,.12);
+}
+
+.time {
+    color: #ddd;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.volume {
+    width: 85px;
+    accent-color: #e50914;
+    cursor: pointer;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.settings-wrapper {
+    position: relative;
+}
+
+.settings-menu {
+    position: absolute;
+    right: 0;
+    bottom: 45px;
+    width: 150px;
+    background: #151515;
+    border: 1px solid #333;
+    border-radius: 7px;
+    padding: 8px;
+    display: none;
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.7);
+}
+
+.settings-menu.show {
+    display: block;
+}
+
+.settings-menu button {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.settings-menu button:hover {
+    background: #252525;
+}
+
+.notice {
+    margin-top: 18px;
+    padding: 16px;
+    background: #101010;
+    border: 1px solid #242424;
+    border-left: 3px solid #e50914;
+    border-radius: 6px;
+    color: #999;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+footer {
+    margin-top: 30px;
+    padding: 30px;
+    text-align: center;
+    border-top: 1px solid #222;
+    color: #777;
+}
+
+@media (max-width: 750px) {
+
+    .header {
+        height: 62px;
+        padding: 0 18px;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .back-btn {
+        padding: 8px 13px;
+        font-size: 14px;
+    }
+
+    .movie-hero {
+        min-height: auto;
+    }
+
+    .hero-content {
+        padding: 45px 18px 70px;
+        flex-direction: column;
+        text-align: center;
+        gap: 25px;
+    }
+
+    .hero-overlay {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(5,5,5,.65),
+                #050505 90%
+            );
+    }
+
+    .hero-poster {
+        width: 190px;
+    }
+
+    .watch-title h1 {
+        font-size: 34px;
+    }
+
+    .movie-meta {
+        justify-content: center;
+        gap: 12px;
+        font-size: 14px;
+    }
+
+    .watch-description {
+        font-size: 15px;
+    }
+
+    .player-section {
+        margin-top: -15px;
+        padding: 0 18px 40px;
+    }
+
+    .player-heading {
+        font-size: 19px;
+    }
+
+    .control-row {
+        gap: 5px;
+    }
+
+    .volume {
+        width: 55px;
+    }
+
+    .time {
+        font-size: 11px;
+    }
+
+    .control-btn {
+        width: 30px;
+        height: 30px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        FLIXORA<span>+</span>
+    </div>
+
+    <a
+        href="index.html"
+        class="back-btn"
+    >
+        ← Home
+    </a>
+
+</header>
+
+<section class="movie-hero">
+
+    <div
+        class="hero-backdrop"
+        id="heroBackdrop"
+    ></div>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-bottom"></div>
+
+    <div class="hero-content">
+
+        <div class="hero-poster">
+
+            <img
+                id="watchPoster"
+                src=""
+                alt="Movie Poster"
+            >
+
+        </div>
+
+        <div class="watch-title">
+
+            <div class="now-playing">
+                ● NOW PLAYING ON FLIXORA
+            </div>
+
+            <h1 id="watchTitle">
+                Loading...
+            </h1>
+
+            <div class="movie-meta">
+
+                <span id="watchYear">
+                    Loading...
+                </span>
+
+                <span id="watchRating">
+                    ⭐ Loading...
+                </span>
+
+                <span id="watchGenre">
+                    🎬 Loading...
+                </span>
+
+            </div>
+
+            <p
+                id="watchDescription"
+                class="watch-description"
+            >
+                Loading movie information...
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="player-section">
+
+    <div class="player-heading">
+        ▶ <span>Watch</span> Movie
+    </div>
+
+    <div
+        class="custom-player"
+        id="customPlayer"
+    >
+
+        <video
+            id="moviePlayer"
+            playsinline
+            preload="metadata"
+        >
+
+            <source
+                src="https://www.w3schools.com/html/mov_bbb.mp4"
+                type="video/mp4"
+            >
+
+            Your browser does not support video playback.
+
+        </video>
+
+
+        <div class="controls">
+
+            <div
+                class="progress-container"
+                id="progressContainer"
+            >
+
+                <div
+                    class="progress"
+                    id="progress"
+                ></div>
+
+            </div>
+
+
+            <div class="control-row">
+
+                <button
+                    class="control-btn"
+                    id="playBtn"
+                    type="button"
+                >
+                    ▶
+                </button>
+
+
+                <button
+                    class="control-btn"
+                    id="muteBtn"
+                    type="button"
+                >
+                    🔊
+                </button>
+
+
+                <input
+                    type="range"
+                    class="volume"
+                    id="volumeSlider"
+                    min="0"
+                    max="1"
+                    step="0.05"
+                    value="1"
+                >
+
+
+                <span
+                    class="time"
+                    id="timeDisplay"
+                >
+                    0:00 / 0:00
+                </span>
+
+
+                <button
+                    class="control-btn"
+                    id="subtitleBtn"
+                    type="button"
+                    title="Subtitles"
+                >
+                    CC
+                </button>
+
+
+                <div class="spacer"></div>
+
+
+                <div class="settings-wrapper">
+
+                    <button
+                        class="control-btn"
+                        id="settingsBtn"
+                        type="button"
+                    >
+                        ⚙
+                    </button>
+
+
+                    <div
+                        class="settings-menu"
+                        id="settingsMenu"
+                    >
+
+                        <button type="button">
+                            Quality
+                        </button>
+
+                        <button type="button">
+                            1080p
+                        </button>
+
+                        <button type="button">
+                            720p
+                        </button>
+
+                        <button type="button">
+                            480p
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="control-btn"
+                    id="fullscreenBtn"
+                    type="button"
+                >
+                    ⛶
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="notice">
+
+        🎬 <strong>Demo Player</strong> —
+        Authorized movie/video content
+        can be connected here.
+
+    </div>
+
+</section>
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* ================= MOVIE DATABASE ================= */
+
+    const db = {
+
+        "Inception": {
+            title: "Inception",
+            year: "2010",
+            rating: "8.8",
+            genre: "Sci-Fi • Thriller",
+            poster: "https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg",
+            description: "A skilled thief who steals secrets through dreams is given a chance to erase his past by completing an impossible mission."
+        },
+
+        "Avengers: Infinity War": {
+            title: "Avengers: Infinity War",
+            year: "2018",
+            rating: "8.4",
+            genre: "Action • Adventure • Sci-Fi",
+            poster: "https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+            description: "The Avengers and their allies face their greatest threat as Thanos seeks to collect the Infinity Stones."
+        },
+
+        "Interstellar": {
+            title: "Interstellar",
+            year: "2014",
+            rating: "8.7",
+            genre: "Sci-Fi • Drama • Adventure",
+            poster: "https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg",
+            description: "A team of explorers travels through a wormhole in space in search of a new home for humanity."
+        },
+
+        "Wonder Woman": {
+            title: "Wonder Woman",
+            year: "2017",
+            rating: "7.4",
+            genre: "Action • Adventure • Fantasy",
+            poster: "https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg",
+            description: "Diana, an Amazon warrior, leaves her island home and discovers her extraordinary powers while fighting to protect humanity."
+        },
+
+        "The Batman": {
+            title: "The Batman",
+            year: "2022",
+            rating: "7.8",
+            genre: "Crime • Drama • Action",
+            poster: "https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg",
+            description: "Batman investigates a series of mysterious crimes while uncovering a dark conspiracy within Gotham City."
+        },
+
+        "Spider-Man": {
+            title: "Spider-Man",
+            year: "2021",
+            rating: "8.2",
+            genre: "Action • Adventure • Sci-Fi",
+            poster: "https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
+            description: "A young superhero faces a dangerous new challenge when characters from other worlds enter his reality."
+        }
+
+    };
+
+
+    /* ================= LOAD SELECTED MOVIE ================= */
+
+    const savedMovie =
+        localStorage.getItem("selectedMovie");
+
+    let movie = null;
+
+
+    if (savedMovie) {
+
+        try {
+
+            const data =
+                JSON.parse(savedMovie);
+
+            if (data && data.title) {
+
+                movie =
+                    db[data.title] || data;
+
+            }
+
+        } catch (error) {
+
+            movie =
+                db[savedMovie] || null;
+
+        }
+
+    }
+
+
+    /* ================= SHOW MOVIE ================= */
+
+    if (!movie) {
+
+        document.getElementById("watchTitle").textContent =
+            "Movie Not Found";
+
+        document.getElementById("watchDescription").textContent =
+            "Please go back to the homepage and select a movie.";
+
+    } else {
+
+        document.getElementById("watchTitle").textContent =
+            movie.title;
+
+        document.getElementById("watchYear").textContent =
+            movie.year;
+
+        document.getElementById("watchRating").textContent =
+            "⭐ " + movie.rating;
+
+        document.getElementById("watchGenre").textContent =
+            "🎬 " + movie.genre;
+
+        document.getElementById("watchDescription").textContent =
+            movie.description;
+
+
+        const poster =
+            document.getElementById("watchPoster");
+
+        if (poster) {
+
+            poster.src =
+                movie.poster;
+
+            poster.alt =
+                movie.title + " Poster";
+
+        }
+
+
+        const backdrop =
+            document.getElementById("heroBackdrop");
+
+        if (backdrop) {
+
+            backdrop.style.backgroundImage =
+                `url("${movie.poster}")`;
+
+        }
+
+
+        document.title =
+            "Watch " + movie.title + " - Flixora";
+
+    }
+
+
+    /* ================= PLAYER ================= */
+
+    const video =
+        document.getElementById("moviePlayer");
+
+    const player =
+        document.getElementById("customPlayer");
+
+    const playBtn =
+        document.getElementById("playBtn");
+
+    const muteBtn =
+        document.getElementById("muteBtn");
+
+    const volume =
+        document.getElementById("volumeSlider");
+
+    const progressBox =
+        document.getElementById("progressContainer");
+
+    const progress =
+        document.getElementById("progress");
+
+    const time =
+        document.getElementById("timeDisplay");
+
+    const fullscreen =
+        document.getElementById("fullscreenBtn");
+
+    const settings =
+        document.getElementById("settingsBtn");
+
+    const menu =
+        document.getElementById("settingsMenu");
+
+
+    /* ================= PLAY / PAUSE ================= */
+
+    if (playBtn && video) {
+
+        playBtn.addEventListener(
+            "click",
+            function () {
+
+                if (video.paused) {
+
+                    video.play();
+
+                } else {
+
+                    video.pause();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    if (video) {
+
+        video.addEventListener(
+            "play",
+            function () {
+
+                if (playBtn) {
+                    playBtn.textContent = "❚❚";
+                }
+
+            }
+        );
+
+
+        video.addEventListener(
+            "pause",
+            function () {
+
+                if (playBtn) {
+                    playBtn.textContent = "▶";
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ================= MUTE ================= */
+
+    if (muteBtn && video) {
+
+        muteBtn.addEventListener(
+            "click",
+            function () {
+
+                video.muted =
+                    !video.muted;
+
+                muteBtn.textContent =
+                    video.muted
+                    ? "🔇"
+                    : "🔊";
+
+            }
+        );
+
+    }
+
+
+    /* ================= VOLUME ================= */
+
+    if (volume && video) {
+
+        volume.addEventListener(
+            "input",
+            function () {
+
+                video.volume =
+                    Number(volume.value);
+
+                video.muted = false;
+
+                if (muteBtn) {
+
+                    muteBtn.textContent =
+                        video.volume === 0
+                        ? "🔇"
+                        : "🔊";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ================= TIME ================= */
+
+    function formatTime(seconds) {
+
+        if (!isFinite(seconds)) {
+            return "0:00";
+        }
+
+        const minutes =
+            Math.floor(seconds / 60);
+
+        const secondsPart =
+            Math.floor(seconds % 60);
+
+        return (
+            minutes +
+            ":" +
+            String(secondsPart).padStart(2, "0")
+        );
+
+    }
+
+
+    if (video) {
+
+        video.addEventListener(
+            "timeupdate",
+            function () {
+
+                if (!video.duration) {
+                    return;
+                }
+
+                const percent =
+                    (video.currentTime /
+                    video.duration) * 100;
+
+                if (progress) {
+
+                    progress.style.width =
+                        percent + "%";
+
+                }
+
+                if (time) {
+
+                    time.textContent =
+                        formatTime(
+                            video.currentTime
+                        ) +
+                        " / " +
+                        formatTime(
+                            video.duration
+                        );
+
+                }
+
+            }
+        );
+
+    }
+    /* ================= SEEK ================= */
+
+    function seekVideo(clientX) {
+
+        if (
+            !video ||
+            !progressBox ||
+            !video.duration ||
+            !isFinite(video.duration)
+        ) {
+            return;
+        }
+
+        const rect =
+            progressBox.getBoundingClientRect();
+
+        let percent =
+            (clientX - rect.left) /
+            rect.width;
+
+        percent =
+            Math.max(
+                0,
+                Math.min(1, percent)
+            );
+
+        video.currentTime =
+            percent * video.duration;
+
+    }
+
+
+    if (progressBox) {
+
+        progressBox.addEventListener(
+            "click",
+            function (event) {
+
+                seekVideo(
+                    event.clientX
+                );
+
+            }
+        );
+
+
+        progressBox.addEventListener(
+            "touchstart",
+            function (event) {
+
+                event.preventDefault();
+
+                if (event.touches[0]) {
+
+                    seekVideo(
+                        event.touches[0].clientX
+                    );
+
+                }
+
+            },
+            { passive: false }
+        );
+
+
+        progressBox.addEventListener(
+            "touchmove",
+            function (event) {
+
+                event.preventDefault();
+
+                if (event.touches[0]) {
+
+                    seekVideo(
+                        event.touches[0].clientX
+                    );
+
+                }
+
+            },
+            { passive: false }
+        );
+
+    }
+
+
+    /* ================= SUBTITLE ================= */
+
+    const subtitleBtn =
+        document.getElementById(
+            "subtitleBtn"
+        );
+
+    let subtitlesOn = false;
+
+    if (subtitleBtn) {
+
+        subtitleBtn.addEventListener(
+            "click",
+            function () {
+
+                subtitlesOn =
+                    !subtitlesOn;
+
+                subtitleBtn.style.color =
+                    subtitlesOn
+                    ? "#e50914"
+                    : "white";
+
+            }
+        );
+
+    }
+
+
+    /* ================= FULLSCREEN ================= */
+
+    if (fullscreen) {
+
+        fullscreen.addEventListener(
+            "click",
+            async function () {
+
+                try {
+
+                    if (!document.fullscreenElement) {
+
+                        if (player) {
+
+                            await player.requestFullscreen();
+
+                        }
+
+                    } else {
+
+                        await document.exitFullscreen();
+
+                    }
+
+                } catch (error) {
+
+                    if (
+                        video &&
+                        video.webkitEnterFullscreen
+                    ) {
+
+                        video.webkitEnterFullscreen();
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ================= SETTINGS ================= */
+
+    if (settings && menu) {
+
+        settings.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+                menu.classList.toggle("show");
+
+            }
+        );
+
+
+        menu.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+            }
+        );
+
+
+        document.addEventListener(
+            "click",
+            function () {
+
+                menu.classList.remove("show");
+
+            }
+        );
+
+    }
+
+
+    /* ================= VIDEO CLICK ================= */
+
+    if (video) {
+
+        video.addEventListener(
+            "click",
+            function () {
+
+                if (video.paused) {
+
+                    video.play();
+
+                } else {
+
+                    video.pause();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    console.log(
+        "🔥 FLIXORA WATCH PAGE READY"
+    );
+
+});
+
+</script>
+
+
+<footer>
+
+    <div class="logo">
+        FLIXORA<span>+</span>
+    </div>
+
+    <p>
+        © 2026 Flixora.
+        All Rights Reserved.
+    </p>
+
+</footer>
+
+</body>
+
+</html>
