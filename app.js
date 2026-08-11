@@ -309,3 +309,24 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 });
+
+// ===============================
+// EXPLORE MOVIES SCROLL
+// ===============================
+
+const exploreMoviesBtn = document.getElementById("exploreMoviesBtn");
+
+if (exploreMoviesBtn) {
+    exploreMoviesBtn.addEventListener("click", function () {
+
+        const trendingSection = document.querySelector(".movies-section:not(.my-list-section)");
+
+        if (trendingSection) {
+            trendingSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+    });
+}
