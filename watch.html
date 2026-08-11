@@ -544,6 +544,24 @@ footer {
                     ▶
                 </button>
 
+<button
+    class="control-btn"
+    id="back10Btn"
+    type="button"
+    title="Back 10 seconds"
+>
+    ↶10
+</button>
+
+<button
+    class="control-btn"
+    id="forward30Btn"
+    type="button"
+    title="Forward 30 seconds"
+>
+    30↷
+</button>
+
 
                 <button
                     class="control-btn"
@@ -814,6 +832,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const playBtn =
         document.getElementById("playBtn");
 
+        const back10Btn =
+    document.getElementById("back10Btn");
+
+const forward30Btn =
+    document.getElementById("forward30Btn");
+
     const muteBtn =
         document.getElementById("muteBtn");
 
@@ -889,6 +913,43 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
     }
+  
+    /* ================= SKIP CONTROLS ================= */
+
+if (back10Btn && video) {
+
+    back10Btn.addEventListener(
+        "click",
+        function () {
+
+            video.currentTime =
+                Math.max(
+                    0,
+                    video.currentTime - 10
+                );
+
+        }
+    );
+
+}
+
+
+if (forward30Btn && video) {
+
+    forward30Btn.addEventListener(
+        "click",
+        function () {
+
+            video.currentTime =
+                Math.min(
+                    video.duration,
+                    video.currentTime + 30
+                );
+
+        }
+    );
+
+}
 
 
     /* ================= MUTE ================= */
