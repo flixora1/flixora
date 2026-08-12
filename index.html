@@ -7,6 +7,8 @@
 
     <title>Flixora 🎬</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -27,13 +29,17 @@
             <a href="#">Trending</a>
         </nav>
 
-        <div class="search-box">
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search movies..."
-            >
-        </div>
+<div class="search-box">
+
+    <span class="search-icon">🔍</span>
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search movies..."
+    >
+
+</div>
 
     </header>
 
@@ -62,7 +68,26 @@
     Explore Movies ▶
 </button>
 
-        </div>
+<div class="hero-stats">
+
+    <div class="hero-stat">
+        <strong>50K+</strong>
+        <span>Users</span>
+    </div>
+
+    <div class="hero-stat">
+        <strong>10K+</strong>
+        <span>Movies</span>
+    </div>
+
+    <div class="hero-stat">
+        <strong>4.9★</strong>
+        <span>Rating</span>
+    </div>
+
+</div>
+
+</div>
 
     </section>
 
@@ -122,6 +147,56 @@
 
     </section>
 
+<section class="movies-section">
+
+    <div class="section-title">
+        <h2>⭐ Top Rated</h2>
+        <span>View All →</span>
+    </div>
+
+    <div class="movie-grid" id="topRatedMovies">
+
+    </div>
+
+</section>
+
+<section class="movies-section">
+
+    <div class="section-title">
+        <h2>🆕 New Releases</h2>
+        <span>View All →</span>
+    </div>
+
+    <div class="movie-grid" id="newReleaseMovies">
+
+    </div>
+
+</section>
+
+<section class="movies-section">
+
+    <div class="section-title">
+        <h2>🎭 Categories</h2>
+        <span>Browse Genres</span>
+    </div>
+
+    <div class="category-row">
+
+        <button class="category-btn">🔥 Action</button>
+
+        <button class="category-btn">👻 Horror</button>
+
+        <button class="category-btn">🚀 Sci-Fi</button>
+
+        <button class="category-btn">😂 Comedy</button>
+
+        <button class="category-btn">🎌 Anime</button>
+
+        <button class="category-btn">🕵️ Thriller</button>
+
+    </div>
+
+</section>
 
     <!-- ================= FOOTER ================= -->
 

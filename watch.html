@@ -850,7 +850,21 @@ footer {
 
 }
 
+.control-btn svg,
+.center-control-btn svg{
+    width:22px;
+    height:22px;
+    stroke-width:2.3;
+}
+
+.play-center-btn svg{
+    width:28px;
+    height:28px;
+}
+
 </style>
+
+<script src="https://unpkg.com/lucide@latest"></script>
 
 </head>
 
@@ -981,14 +995,12 @@ footer {
         </button>
 
 
-        <button
-            class="center-control-btn play-center-btn"
-            id="playBtn"
-            type="button"
-            title="Play / Pause"
-        >
-            ▶
-        </button>
+<button
+class="center-control-btn play-center-btn"
+id="playBtn"
+type="button">
+<i data-lucide="play"></i>
+</button>
 
 
         <button
@@ -1035,14 +1047,12 @@ footer {
 
         <div class="control-row">
 
-            <button
-                class="control-btn"
-                id="muteBtn"
-                type="button"
-                title="Mute"
-            >
-                🔊
-            </button>
+<button
+class="control-btn"
+id="muteBtn"
+type="button">
+<i data-lucide="volume-2"></i>
+</button>
 
 
             <input
@@ -1068,14 +1078,12 @@ footer {
             <div class="spacer"></div>
 
 
-            <button
-                class="control-btn"
-                id="subtitleBtn"
-                type="button"
-                title="Subtitles"
-            >
-                CC
-            </button>
+<button
+class="control-btn"
+id="subtitleBtn"
+type="button">
+<i data-lucide="captions"></i>
+</button>
 
 
             <div class="settings-wrapper">
@@ -1086,7 +1094,7 @@ footer {
                     type="button"
                     title="Settings"
                 >
-                    ⚙
+<i data-lucide="settings"></i>
                 </button>
 
 
@@ -1122,7 +1130,7 @@ footer {
                 type="button"
                 title="Fullscreen"
             >
-                ⛶
+<i data-lucide="maximize"></i>
             </button>
 
         </div>
@@ -1308,6 +1316,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const playBtn =
         document.getElementById("playBtn");
 
+lucide.createIcons();
+
+if (playBtn) {
+
+    playBtn.innerHTML =
+        '<i data-lucide="play"></i>';
+
+}
+
         const back10Btn =
     document.getElementById("back10Btn");
 
@@ -1386,28 +1403,37 @@ let lastTap = 0;
 
     if (video) {
 
-        video.addEventListener(
-            "play",
-            function () {
+video.addEventListener(
+    "play",
+    function () {
 
-                if (playBtn) {
-                    playBtn.textContent = "❚❚";
-                }
+        if (playBtn) {
 
-            }
-        );
+            playBtn.innerHTML =
+                '<i data-lucide="pause"></i>';
 
+            lucide.createIcons();
 
-        video.addEventListener(
-            "pause",
-            function () {
+        }
 
-                if (playBtn) {
-                    playBtn.textContent = "▶";
-                }
+    }
+);
 
-            }
-        );
+video.addEventListener(
+    "pause",
+    function () {
+
+        if (playBtn) {
+
+            playBtn.innerHTML =
+                '<i data-lucide="play"></i>';
+
+            lucide.createIcons();
+
+        }
+
+    }
+);
 
     }
   
@@ -1955,6 +1981,8 @@ if (video && loader) {
     );
 
 }
+
+    lucide.createIcons();
 
     console.log(
         "🔥 FLIXORA WATCH PAGE READY"

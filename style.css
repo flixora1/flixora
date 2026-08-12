@@ -1,4 +1,5 @@
-```css
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -8,7 +9,7 @@
 body {
     background: #050505;
     color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 /* ================= HEADER ================= */
@@ -16,20 +17,33 @@ body {
 .header {
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 999;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 5%;
-    background: rgba(5, 5, 5, 0.97);
-    border-bottom: 1px solid #222;
+
+    padding: 18px 5%;
+
+    background: rgba(5,5,5,.72);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border-bottom: 1px solid rgba(255,255,255,.05);
+
+    transition: .3s ease;
 }
 
 .logo {
-    font-size: 27px;
+    font-size: 30px;
     font-weight: 900;
-    letter-spacing: 2px;
-    color: #ffffff;
+    letter-spacing: 3px;
+    color: #fff;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
 }
 
 .logo span {
@@ -53,6 +67,50 @@ body {
     color: #e50914;
 }
 
+/* ================= SEARCH BOX ================= */
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+width: 240px;
+padding: 12px 18px;
+padding-left: 42px;
+
+border: 1px solid rgba(255,255,255,.08);
+border-radius: 999px;
+
+background: rgba(255,255,255,.05);
+backdrop-filter: blur(10px);
+
+color: #fff;
+
+font-size: 14px;
+font-family: 'Inter', sans-serif;
+
+outline: none;
+
+transition: all .3s ease;
+}
+
+.search-box input:focus {
+
+    width: 280px;
+
+    border-color: #e50914;
+
+    background: rgba(255,255,255,.08);
+
+    box-shadow:
+        0 0 0 3px rgba(229,9,20,.15),
+        0 10px 30px rgba(229,9,20,.15);
+
+}
+
+.search-box input::placeholder {
+    color: #888;
+}
 
 /* ================= HERO ================= */
 
@@ -79,10 +137,38 @@ body {
 
     background-size: cover;
     background-position: center;
+    animation: heroZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom {
+
+    from {
+        background-size: 100%;
+    }
+
+    to {
+        background-size: 110%;
+    }
+
 }
 
 .hero-content {
-    max-width: 600px;
+    max-width: 650px;
+    animation: heroFade 1s ease;
+}
+
+@keyframes heroFade {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
 }
 
 .hero-small {
@@ -108,20 +194,35 @@ body {
 
 .hero-btn {
     margin-top: 25px;
-    padding: 13px 25px;
+    padding: 14px 28px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+
     background: #e50914;
     color: white;
+
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 700;
+
     cursor: pointer;
-    transition: 0.3s;
+
+    transition: all .3s ease;
+
+    box-shadow:
+        0 0 20px rgba(229,9,20,.35),
+        0 10px 30px rgba(229,9,20,.25);
 }
 
 .hero-btn:hover {
-    background: #b20710;
-    transform: translateY(-2px);
+    background: #ff1e28;
+
+    transform:
+        translateY(-3px)
+        scale(1.03);
+
+    box-shadow:
+        0 0 30px rgba(229,9,20,.55),
+        0 15px 40px rgba(229,9,20,.35);
 }
 
 
@@ -167,13 +268,27 @@ body {
     overflow: hidden;
     border-radius: 8px;
     background: #151515;
+    
+    border: 1px solid rgba(255,255,255,.05);
+
+box-shadow:
+    0 10px 30px rgba(0,0,0,.35);
+    
     cursor: pointer;
     transition: 0.3s ease;
 }
 
 .movie-card:hover {
-    transform: scale(1.04);
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.7);
+    transform:
+        translateY(-8px)
+        scale(1.03);
+
+    border-color:
+        rgba(229,9,20,.35);
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.7),
+        0 0 30px rgba(229,9,20,.12);
 }
 
 
@@ -205,6 +320,51 @@ body {
     pointer-events: none;
 }
 
+.movie-card::before {
+
+    content: "▶";
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.7);
+
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(0,0,0,.65);
+
+    backdrop-filter: blur(10px);
+
+    font-size: 28px;
+    color: #fff;
+
+    opacity: 0;
+
+    transition: all .3s ease;
+
+    z-index: 3;
+}
+
+.movie-card:hover::before {
+
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+
+}
 
 /* ================= MOVIE INFO ================= */
 
@@ -252,11 +412,6 @@ body {
 .watch-btn:hover {
     background: #b20710;
 }
-
-.watch-btn:hover {
-    background: #b20710;
-}
-
 
 /* ================= FOOTER ================= */
 
@@ -419,4 +574,109 @@ footer p {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    color: #888;
+    font-size: 14px;
+
+    pointer-events: none;
+}
+
+.category-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    border: 1px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.04);
+
+    color: #fff;
+
+    padding: 10px 18px;
+
+    border-radius: 999px;
+
+    cursor: pointer;
+
+    font-family: 'Inter', sans-serif;
+
+    transition: all .3s ease;
+}
+
+.category-btn:hover {
+
+    background: #e50914;
+
+    border-color: #e50914;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(229,9,20,.25);
+}
+
+.hero-stats {
+    display: flex;
+    gap: 30px;
+    margin-top: 35px;
+}
+
+.hero-stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-stat strong {
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.hero-stat span {
+    color: #999;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+@media (max-width: 700px) {
+
+    .hero-stats {
+        gap: 18px;
+        flex-wrap: wrap;
+    }
+
+    .hero-stat strong {
+        font-size: 18px;
+    }
+
+}
+
+.rating-badge {
+
+    display: inline-flex;
+    align-items: center;
+
+    padding: 4px 10px;
+
+    border-radius: 999px;
+
+    background: rgba(255, 193, 7, .15);
+
+    border: 1px solid rgba(255, 193, 7, .35);
+
+    color: #ffd54f;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    backdrop-filter: blur(10px);
+
 }
