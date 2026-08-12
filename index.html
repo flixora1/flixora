@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
@@ -31,7 +32,9 @@
 
 <div class="search-box">
 
-    <span class="search-icon">🔍</span>
+<span class="search-icon">
+    <i data-lucide="search"></i>
+</span>
 
     <input
         type="text"
@@ -101,9 +104,10 @@
 
     <div class="section-title">
 
-        <h2>
-            ❤️ My List
-        </h2>
+<h2>
+    <i data-lucide="heart"></i>
+    My List
+</h2>
 
         <span>
             Your Saved Movies
@@ -128,9 +132,10 @@
 
         <div class="section-title">
 
-            <h2>
-                🔥 Trending Movies
-            </h2>
+<h2>
+    <i data-lucide="flame"></i>
+    Trending Movies
+</h2>
 
             <span>
                 View All →
@@ -150,7 +155,10 @@
 <section class="movies-section">
 
     <div class="section-title">
-        <h2>⭐ Top Rated</h2>
+<h2>
+    <i data-lucide="star"></i>
+    Top Rated
+</h2>
         <span>View All →</span>
     </div>
 
@@ -163,7 +171,10 @@
 <section class="movies-section">
 
     <div class="section-title">
-        <h2>🆕 New Releases</h2>
+<h2>
+    <i data-lucide="sparkles"></i>
+    New Releases
+</h2>
         <span>View All →</span>
     </div>
 
@@ -176,7 +187,75 @@
 <section class="movies-section">
 
     <div class="section-title">
-        <h2>🎭 Categories</h2>
+        <h2>
+            <i data-lucide="play-circle"></i>
+            Latest Trailers
+        </h2>
+        <span>Watch All →</span>
+    </div>
+
+    <div class="trailer-row">
+
+        <div class="trailer-card">
+            <iframe src="https://www.youtube.com/embed/73_1biulkYk"
+                allowfullscreen></iframe>
+            <h3>Superman (2025)</h3>
+        </div>
+
+        <div class="trailer-card">
+            <iframe src="https://www.youtube.com/embed/uYPbbksJxIg"
+                allowfullscreen></iframe>
+            <h3>Fantastic Four</h3>
+        </div>
+
+        <div class="trailer-card">
+            <iframe src="https://www.youtube.com/embed/RH3OxVFvTeg"
+                allowfullscreen></iframe>
+            <h3>Jurassic World Rebirth</h3>
+        </div>
+
+        <div class="trailer-card">
+            <iframe src="https://www.youtube.com/embed/VQRLujxTm3c"
+                allowfullscreen></iframe>
+            <h3>Avatar: Fire and Ash</h3>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="movies-section">
+
+    <div class="section-title">
+        <h2>
+            <i data-lucide="tv"></i>
+            Browse by Provider
+        </h2>
+        <span>Streaming Services</span>
+    </div>
+
+    <div class="provider-grid">
+
+        <div class="provider-card">Netflix</div>
+        <div class="provider-card">Prime Video</div>
+        <div class="provider-card">Disney+</div>
+        <div class="provider-card">Apple TV+</div>
+        <div class="provider-card">Max</div>
+        <div class="provider-card">Hulu</div>
+        <div class="provider-card">Paramount+</div>
+        <div class="provider-card">MUBI</div>
+
+    </div>
+
+</section>
+
+<section class="movies-section">
+
+    <div class="section-title">
+<h2>
+    <i data-lucide="layout-grid"></i>
+    Categories
+</h2>
         <span>Browse Genres</span>
     </div>
 
