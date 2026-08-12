@@ -163,17 +163,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         <h3>${movie.title}</h3>
 
-                        <div class="movie-meta">
+<div class="movie-meta">
 
-                            <span>
-                                ${movie.year}
-                            </span>
+    <span>
+        ${movie.year}
+    </span>
 
-                            <span>
-                                ⭐ ${movie.rating}
-                            </span>
+    <span class="rating-badge">
+        ⭐ ${movie.rating}
+    </span>
 
-                        </div>
+</div>
 
                         <button
                             class="watch-btn"
@@ -308,6 +308,49 @@ document.addEventListener("DOMContentLoaded", function () {
         "🔥 FLIXORA APP.JS READY"
     );
 
+// ===============================
+// CATEGORY FILTER
+// ===============================
+
+const categoryButtons =
+    document.querySelectorAll(".category-btn");
+
+categoryButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const category =
+            button.textContent.toLowerCase();
+
+        const movieCards =
+            document.querySelectorAll(".movie-card");
+
+        movieCards.forEach(card => {
+
+            const title =
+                card.querySelector("h3")
+                ?.textContent
+                .toLowerCase() || "";
+
+            if (
+                category.includes("action") &&
+                !title.includes("batman") &&
+                !title.includes("avengers") &&
+                !title.includes("spider")
+            ) {
+                card.style.display = "none";
+            }
+
+            else {
+                card.style.display = "";
+            }
+
+        });
+
+    });
+
+});
+
 });
 
 // ===============================
@@ -330,3 +373,5 @@ if (exploreMoviesBtn) {
 
     });
 }
+
+lucide.createIcons();
