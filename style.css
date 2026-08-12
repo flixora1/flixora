@@ -750,3 +750,15 @@ footer p {
     border-color:#e50914;
     box-shadow:0 10px 30px rgba(229,9,20,.2);
 }
+
+/* ================= TRAILER HOVER EFFECT ================= */
+
+.trailer-card{
+    transition:.3s ease;
+}
+
+.trailer-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 40px rgba(229,9,20,.25);
+    border-color:#e50914;
+}
