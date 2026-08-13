@@ -65,7 +65,27 @@ document.addEventListener("DOMContentLoaded", function () {
             runtime: "2h 28m",
             poster: "https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
             description: "A young superhero faces a dangerous new challenge when characters from other worlds enter his reality."
-        }
+        },
+
+        "Superman": {
+    title: "Superman",
+    year: "2025",
+    rating: "7.8",
+    genre: "Action • Adventure",
+    runtime: "2h 09m",
+    poster: "https://image.tmdb.org/t/p/w500/ombsmhYUqR4qqOLOxAyr5V8hbyv.jpg",
+    description: "Clark Kent struggles to balance his Kryptonian heritage with his human upbringing."
+},
+
+"Fantastic Four": {
+    title: "Fantastic Four",
+    year: "2025",
+    rating: "8.0",
+    genre: "Sci-Fi • Action",
+    runtime: "2h 10m",
+    poster: "https://image.tmdb.org/t/p/w500/x26MtUlwtWD26d0G0FXcppxCJio.jpg",
+    description: "Marvel's first family faces a cosmic threat."
+}
 
     };
 
