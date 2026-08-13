@@ -873,6 +873,29 @@ footer {
 
 }
 
+.unlock-btn{
+    position:absolute;
+    left:15px;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:999;
+
+    width:48px;
+    height:48px;
+
+    border:none;
+    border-radius:50%;
+
+    background:rgba(0,0,0,.75);
+
+    color:white;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+}
+
 .control-btn svg,
 .center-control-btn svg{
     width:22px;
@@ -976,6 +999,14 @@ footer {
     </div>
 
 <div class="custom-player" id="customPlayer">
+
+<button
+id="unlockBtn"
+class="unlock-btn"
+type="button"
+>
+<i data-lucide="lock-open"></i>
+</button>
 
     <video
         id="moviePlayer"
@@ -1167,10 +1198,52 @@ type="button">
         Speed 2x
     </button>
 
+<hr style="border-color:#333;margin:8px 0;">
+
+<button
+    type="button"
+    class="quality-option"
+    data-quality="Auto"
+>
+    Quality: Auto
+</button>
+
+<button
+    type="button"
+    class="quality-option"
+    data-quality="1080p"
+>
+    1080p
+</button>
+
+<button
+    type="button"
+    class="quality-option"
+    data-quality="720p"
+>
+    720p
+</button>
+
+<button
+    type="button"
+    class="quality-option"
+    data-quality="480p"
+>
+    480p
+</button>
+
 </div>
 
             </div>
 
+<button
+class="control-btn"
+id="lockBtn"
+type="button"
+title="Lock Screen"
+>
+<i data-lucide="lock"></i>
+</button>
 
             <button
                 class="control-btn"
@@ -1409,6 +1482,9 @@ const forward30Btn =
     const speedOptions =
         document.querySelectorAll(".speed-option");
 
+const qualityOptions =
+    document.querySelectorAll(".quality-option");
+
 const centerControls =
     document.getElementById("centerControls");
 
@@ -1430,6 +1506,31 @@ const loader =
 let hideControlsTimer;
 
 let lastTap = 0;
+
+const lockBtn =
+    document.getElementById("lockBtn");
+
+const unlockBtn =
+    document.getElementById("unlockBtn");
+
+let isLocked = false;
+
+const savedProgress =
+    localStorage.getItem(movieProgressKey);
+
+if (video && savedProgress) {
+
+    video.addEventListener(
+        "loadedmetadata",
+        function () {
+
+            video.currentTime =
+                Number(savedProgress);
+
+        }
+    );
+
+}
 
     /* ================= PLAY / PAUSE ================= */
 
@@ -1531,52 +1632,53 @@ if (forward30Btn && video) {
 
     /* ================= MUTE ================= */
 
-    if (muteBtn && video) {
+if (muteBtn && video) {
 
-        muteBtn.addEventListener(
-            "click",
-            function () {
+    muteBtn.addEventListener(
+        "click",
+        function () {
 
-                video.muted =
-                    !video.muted;
+            video.muted = !video.muted;
 
-                muteBtn.textContent =
-                    video.muted
-                    ? "🔇"
-                    : "🔊";
+            if (video.muted) {
+
+                muteBtn.innerHTML =
+                    '<i data-lucide="volume-x"></i>';
+
+            } else {
+
+                muteBtn.innerHTML =
+                    '<i data-lucide="volume-2"></i>';
 
             }
-        );
 
-    }
+            lucide.createIcons();
+
+        }
+    );
+
+}
 
 
     /* ================= VOLUME ================= */
 
-    if (volume && video) {
+if (muteBtn) {
 
-        volume.addEventListener(
-            "input",
-            function () {
+    if (video.volume === 0) {
 
-                video.volume =
-                    Number(volume.value);
+        muteBtn.innerHTML =
+            '<i data-lucide="volume-x"></i>';
 
-                video.muted = false;
+    } else {
 
-                if (muteBtn) {
-
-                    muteBtn.textContent =
-                        video.volume === 0
-                        ? "🔇"
-                        : "🔊";
-
-                }
-
-            }
-        );
+        muteBtn.innerHTML =
+            '<i data-lucide="volume-2"></i>';
 
     }
+
+    lucide.createIcons();
+
+}
 
 
     /* ================= TIME ================= */
@@ -1896,6 +1998,97 @@ if (speedOptions.length && video) {
 
 }
 
+if (lockBtn && unlockBtn) {
+
+    lockBtn.addEventListener(
+        "click",
+        function () {
+
+            isLocked = true;
+
+            if (centerControls) {
+                centerControls.style.display = "none";
+            }
+
+            if (playerControls) {
+                playerControls.style.display = "none";
+            }
+
+            unlockBtn.style.display = "flex";
+            
+            setTimeout(function () {
+
+    if (isLocked) {
+
+        unlockBtn.style.opacity = "0";
+
+    }
+
+}, 3000);
+            
+        }
+    );
+
+    unlockBtn.addEventListener(
+        "click",
+        function () {
+
+            isLocked = false;
+
+unlockBtn.style.display = "none";
+unlockBtn.style.opacity = "1";
+
+            if (centerControls) {
+                centerControls.style.display = "";
+            }
+
+            if (playerControls) {
+                playerControls.style.display = "";
+            }
+
+            unlockBtn.style.display = "none";
+
+            showControls();
+        }
+    );
+
+}
+
+/* ================= QUALITY SELECTOR ================= */
+
+if (qualityOptions.length) {
+
+    qualityOptions.forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                const quality =
+                    button.dataset.quality;
+
+                qualityOptions.forEach(function (btn) {
+
+                    btn.style.color =
+                        "white";
+
+                });
+
+                button.style.color =
+                    "#e50914";
+
+                console.log(
+                    "Quality Selected:",
+                    quality
+                );
+
+            }
+        );
+
+    });
+
+}
+
     /* ================= VIDEO CLICK ================= */
 
 if (video) {
@@ -1956,6 +2149,14 @@ if (player) {
 
     player.addEventListener("click", function () {
 
+if (isLocked) {
+
+    unlockBtn.style.display = "flex";
+    unlockBtn.style.opacity = "1";
+
+    return;
+}
+
         if (centerControls) {
             centerControls.classList.remove("hidden");
         }
@@ -2013,6 +2214,10 @@ function showControls() {
     if (playerControls) {
         playerControls.classList.remove("hidden");
     }
+
+if (isLocked) {
+    return;
+}
 
     clearTimeout(hideControlsTimer);
 
