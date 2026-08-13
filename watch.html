@@ -965,6 +965,15 @@ footer {
             type="video/mp4"
         >
 
+<track
+    id="englishTrack"
+    kind="subtitles"
+    label="English"
+    srclang="en"
+    src="english.vtt"
+    default
+>
+
         Your browser does not support video playback.
 
     </video>
@@ -1098,28 +1107,44 @@ type="button">
                 </button>
 
 
-                <div
-                    class="settings-menu"
-                    id="settingsMenu"
-                >
+<div
+    class="settings-menu"
+    id="settingsMenu"
+>
 
-                    <button type="button">
-                        Quality
-                    </button>
+    <button
+        type="button"
+        class="speed-option"
+        data-speed="0.5"
+    >
+        Speed 0.5x
+    </button>
 
-                    <button type="button">
-                        1080p
-                    </button>
+    <button
+        type="button"
+        class="speed-option"
+        data-speed="1"
+    >
+        Speed 1x
+    </button>
 
-                    <button type="button">
-                        720p
-                    </button>
+    <button
+        type="button"
+        class="speed-option"
+        data-speed="1.5"
+    >
+        Speed 1.5x
+    </button>
 
-                    <button type="button">
-                        480p
-                    </button>
+    <button
+        type="button"
+        class="speed-option"
+        data-speed="2"
+    >
+        Speed 2x
+    </button>
 
-                </div>
+</div>
 
             </div>
 
@@ -1218,6 +1243,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const savedMovie =
         localStorage.getItem("selectedMovie");
+
+    const movieProgressKey =
+        "progress_" + savedMovie;
 
     let movie = null;
 
@@ -1354,6 +1382,9 @@ const forward30Btn =
 
     const menu =
         document.getElementById("settingsMenu");
+
+    const speedOptions =
+        document.querySelectorAll(".speed-option");
 
 const centerControls =
     document.getElementById("centerControls");
@@ -1589,8 +1620,12 @@ if (progressThumb) {
 
                 }
 
-            }
-        );
+ localStorage.setItem(
+    movieProgressKey,
+    video.currentTime
+  );
+}
+);
 
     }
     /* ================= SEEK ================= */
@@ -1686,26 +1721,37 @@ if (progressThumb) {
             "subtitleBtn"
         );
 
-    let subtitlesOn = false;
+const track =
+    document.getElementById("englishTrack");
 
-    if (subtitleBtn) {
+if (track && subtitleBtn) {
 
-        subtitleBtn.addEventListener(
-            "click",
-            function () {
+    track.mode = "hidden";
 
-                subtitlesOn =
-                    !subtitlesOn;
+    subtitleBtn.addEventListener(
+        "click",
+        function () {
+
+            if (track.mode === "showing") {
+
+                track.mode = "hidden";
 
                 subtitleBtn.style.color =
-                    subtitlesOn
-                    ? "#e50914"
-                    : "white";
+                    "white";
+
+            } else {
+
+                track.mode = "showing";
+
+                subtitleBtn.style.color =
+                    "#e50914";
 
             }
-        );
 
-    }
+        }
+    );
+
+}
 
 
     /* ================= FULLSCREEN ================= */
@@ -1788,6 +1834,40 @@ if (progressThumb) {
 
     }
 
+/* ================= PLAYBACK SPEED ================= */
+
+if (speedOptions.length && video) {
+
+    speedOptions.forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                const speed =
+                    Number(
+                        button.dataset.speed
+                    );
+
+                video.playbackRate =
+                    speed;
+
+                speedOptions.forEach(function (btn) {
+
+                    btn.style.color =
+                        "white";
+
+                });
+
+                button.style.color =
+                    "#e50914";
+
+            }
+        );
+
+    });
+
+}
 
     /* ================= VIDEO CLICK ================= */
 

@@ -206,6 +206,10 @@ transition: all .3s ease;
 
     cursor: pointer;
 
+   display: inline-flex;
+align-items: center;
+gap: 8px;
+
     transition: all .3s ease;
 
     box-shadow:
@@ -609,6 +613,11 @@ footer p {
     font-family: 'Inter', sans-serif;
 
     transition: all .3s ease;
+
+    display: inline-flex;
+align-items: center;
+gap: 8px;
+
 }
 
 .category-btn:hover {
@@ -621,6 +630,14 @@ footer p {
 
     box-shadow:
         0 10px 25px rgba(229,9,20,.25);
+}
+
+.category-btn i{
+    width:16px;
+    height:16px;
+
+    position: relative;
+    top: 2px;
 }
 
 .hero-stats {
@@ -761,4 +778,25 @@ footer p {
     transform:translateY(-6px);
     box-shadow:0 15px 40px rgba(229,9,20,.25);
     border-color:#e50914;
+}
+
+.provider-card{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    min-height:100px;
+}
+
+.provider-card img{
+    max-width:90px;
+    max-height:35px;
+    object-fit:contain;
+    filter:brightness(1.1);
+}
+
+.provider-card span{
+    font-size:14px;
+    font-weight:600;
 }
